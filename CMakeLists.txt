@@ -100,7 +100,7 @@ root_generate_dictionary(
 target_link_libraries(CRoot PUBLIC COLA ROOT::RIO ${ROOT_LIBRARIES})
 
 # Check for COLA_FETCH_MODE to prevent install instructions from generating
-if (NOT COLA_FETCH_MODE)
+if (NOT $ENV{COLA_FETCH_MODE})
     # Configure config files
     configure_package_config_file(
         "${PROJECT_SOURCE_DIR}/cmake/${COLA_MODULE_NAME}Config.cmake.in"
