@@ -83,18 +83,18 @@ set_target_properties(
 # don't lint external UniGen code
 set_source_files_properties(${UNIGEN_SRCS} PROPERTIES SKIP_LINTING TRUE)
 
+get_target_property(COLA_HEADERS COLA PUBLIC_HEADER)
 # Generate dictionaries for I/O classes
 root_generate_dictionary(
-    Dict_CRoot
-    ${COLA_DIR}/include/COLA.hh
-    ${COLA_DIR}/include/LorentzVector.hh
+    Dict_CRootWriter
+    ${COLA_HEADERS}
     UniGen/include/URun.hh
     UniGen/include/UEvent.hh
     UniGen/include/UParticle.hh
     LINKDEF
     LinkDef.hh
     MODULE
-    CRoot
+    CRootWriter
 )
 
 target_link_libraries(CRoot PUBLIC COLA ROOT::RIO ${ROOT_LIBRARIES})
