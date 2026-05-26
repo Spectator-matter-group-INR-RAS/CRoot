@@ -1,5 +1,5 @@
 ##
-# CRootWriter - COLA Library Module for ROOT data storage support.
+# CRoot - COLA Library Module for ROOT data storage support.
 # Copyright (C) 2025-2026 Savva Savenkov
 #
 # This file is part of CRoot
@@ -19,7 +19,7 @@
 
 cmake_minimum_required(VERSION 3.22)
 project(
-    CRootWriter
+    CRoot
     VERSION 1.1
     LANGUAGES CXX
 )
@@ -33,7 +33,7 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
 set(CMAKE_INSTALL_PREFIX ${COLA_DIR})
-set(COLA_MODULE_NAME CRootWriter)
+set(COLA_MODULE_NAME CRoot)
 
 set(COLA_CMAKE_CXX_CLANG_TIDY
     ""
@@ -51,12 +51,12 @@ set(SRCS
     CRootModule.cc
     ${UNIGEN_SRCS}
 )
-add_library(CRootWriter SHARED ${SRCS})
+add_library(CRoot SHARED ${SRCS})
 
-target_compile_features(CRootWriter PUBLIC cxx_std_17)
+target_compile_features(CRoot PUBLIC cxx_std_17)
 
 target_include_directories(
-    CRootWriter
+    CRoot
     PUBLIC "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>"
            "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/CRootWriter>"
            "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/UniGen/include>"
@@ -66,14 +66,14 @@ target_include_directories(
            "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${COLA_MODULE_NAME}>"
 )
 
-set(CRootWriter_PUBLIC_HEADER
+set(CRoot_PUBLIC_HEADER
     "CRootWriter/CRootWriter.hh;CRootWriter/CRootWriterFactory.hh;\
 UniGen/include/UEvent.hh;UniGen/include/UParticle.hh;UniGen/include/URun.hh;CUniGenWriter/CUniGenWriter.hh;CNativeRootWriter/CNativeRootWriter.hh;\
 CAAMCCWriter/CAAMCCWriter.hh;CRootModule.hh"
 )
 
 set_target_properties(
-    CRootWriter
+    CRoot
     PROPERTIES PUBLIC_HEADER "${CRootWriter_PUBLIC_HEADER}"
                CXX_CLANG_TIDY "${COLA_CMAKE_CXX_CLANG_TIDY}"
                INSTALL_RPATH_USE_LINK_PATH ON
@@ -85,7 +85,7 @@ set_source_files_properties(${UNIGEN_SRCS} PROPERTIES SKIP_LINTING TRUE)
 
 # Generate dictionaries for I/O classes
 root_generate_dictionary(
-    Dict_CRootWriter
+    Dict_CRoot
     ${COLA_DIR}/include/COLA.hh
     ${COLA_DIR}/include/LorentzVector.hh
     UniGen/include/URun.hh
@@ -94,10 +94,10 @@ root_generate_dictionary(
     LINKDEF
     LinkDef.hh
     MODULE
-    CRootWriter
+    CRoot
 )
 
-target_link_libraries(CRootWriter PUBLIC COLA ROOT::RIO ${ROOT_LIBRARIES})
+target_link_libraries(CRoot PUBLIC COLA ROOT::RIO ${ROOT_LIBRARIES})
 
 # Check for COLA_FETCH_MODE to prevent install instructions from generating
 if (NOT COLA_FETCH_MODE)
@@ -110,14 +110,14 @@ if (NOT COLA_FETCH_MODE)
 
     write_basic_package_version_file(
         ${CMAKE_CURRENT_BINARY_DIR}/${COLA_MODULE_NAME}ConfigVersion.cmake
-        VERSION ${CRootWriter_Version}
+        VERSION ${CRoot_Version}
         COMPATIBILITY AnyNewerVersion
     )
 
     # Install library
     install(
-        TARGETS CRootWriter
-        EXPORT CRootWriterExport
+        TARGETS CRoot
+        EXPORT CRootExport
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/${COLA_MODULE_NAME}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${COLA_MODULE_NAME}
         INCLUDES
@@ -125,7 +125,7 @@ if (NOT COLA_FETCH_MODE)
     )
 
     # Install export file and config files
-    install(EXPORT CRootWriterExport DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${COLA_MODULE_NAME})
+    install(EXPORT CRootExport DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${COLA_MODULE_NAME})
 
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${COLA_MODULE_NAME}Config.cmake"
                   "${CMAKE_CURRENT_BINARY_DIR}/${COLA_MODULE_NAME}ConfigVersion.cmake"
