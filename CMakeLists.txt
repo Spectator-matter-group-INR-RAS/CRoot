@@ -74,7 +74,7 @@ CAAMCCWriter/CAAMCCWriter.hh;CRootModule.hh"
 
 set_target_properties(
     CRoot
-    PROPERTIES PUBLIC_HEADER "${CRootWriter_PUBLIC_HEADER}"
+    PROPERTIES PUBLIC_HEADER "${CRoot_PUBLIC_HEADER}"
                CXX_CLANG_TIDY "${COLA_CMAKE_CXX_CLANG_TIDY}"
                INSTALL_RPATH_USE_LINK_PATH ON
                BUILD_WITH_INSTALL_RPATH TRUE
