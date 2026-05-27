@@ -74,7 +74,7 @@ CAAMCCWriter/CAAMCCWriter.hh;CRootModule.hh"
 
 set_target_properties(
     CRoot
-    PROPERTIES PUBLIC_HEADER "${CRootWriter_PUBLIC_HEADER}"
+    PROPERTIES PUBLIC_HEADER "${CRoot_PUBLIC_HEADER}"
                CXX_CLANG_TIDY "${COLA_CMAKE_CXX_CLANG_TIDY}"
                INSTALL_RPATH_USE_LINK_PATH ON
                BUILD_WITH_INSTALL_RPATH TRUE
@@ -83,24 +83,23 @@ set_target_properties(
 # don't lint external UniGen code
 set_source_files_properties(${UNIGEN_SRCS} PROPERTIES SKIP_LINTING TRUE)
 
+target_link_libraries(CRoot PUBLIC COLA ROOT::RIO ${ROOT_LIBRARIES})
+
+get_target_property(COLA_HEADERS COLA PUBLIC_HEADER)
 # Generate dictionaries for I/O classes
 root_generate_dictionary(
     Dict_CRoot
-    ${COLA_DIR}/include/COLA.hh
-    ${COLA_DIR}/include/LorentzVector.hh
+    ${COLA_EVENT_DATA}
     UniGen/include/URun.hh
     UniGen/include/UEvent.hh
     UniGen/include/UParticle.hh
     LINKDEF
     LinkDef.hh
-    MODULE
-    CRoot
+    MODULE CRoot
 )
 
-target_link_libraries(CRoot PUBLIC COLA ROOT::RIO ${ROOT_LIBRARIES})
-
 # Check for COLA_FETCH_MODE to prevent install instructions from generating
-if (NOT COLA_FETCH_MODE)
+if (NOT DEFINED ENV{COLA_FETCH_MODE})
     # Configure config files
     configure_package_config_file(
         "${PROJECT_SOURCE_DIR}/cmake/${COLA_MODULE_NAME}Config.cmake.in"
