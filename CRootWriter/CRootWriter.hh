@@ -21,14 +21,16 @@
 #ifndef CROOT_CROOTWRITER_HH
 #define CROOT_CROOTWRITER_HH
 
-#include "Riostream.h"
 #include "TFile.h"
 #include "TTree.h"
-#include "UEvent.hh"
-#include "UParticle.hh"
-#include "URun.hh"
 
 #include <COLA.hh>
+#include <EventData.hh>
+
+#include <cstddef>
+#include <map>
+#include <memory>
+#include <string>
 
 namespace cola {
 

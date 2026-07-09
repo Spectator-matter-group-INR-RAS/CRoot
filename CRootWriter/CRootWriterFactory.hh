@@ -23,6 +23,10 @@
 
 #include <COLA.hh>
 
+#include <memory>
+#include <string>
+#include <unordered_map>
+
 namespace cola {
 
   class CRootWriterFactory final : public VWriterFactory {

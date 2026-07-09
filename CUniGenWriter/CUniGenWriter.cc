@@ -20,6 +20,18 @@
 
 #include "CUniGenWriter.hh"
 
+#include "CRootWriter.hh"
+#include "UEvent.hh"
+#include "URun.hh"
+
+#include <EventData.hh>
+#include <RtypesCore.h>
+#include <TTree.h>
+
+#include <cstddef>
+#include <memory>
+#include <string>
+
 using namespace cola;
 
 CUniGenWriter::CUniGenWriter(const std::string& f_name, size_t buff_size, bool write_coord)

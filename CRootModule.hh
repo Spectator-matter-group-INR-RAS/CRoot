@@ -28,4 +28,4 @@ namespace cola {
   using CRootModule = GenericModule<CRootWriterFactory>;
 }
 
-#endif // CROOT_CROOTWRITERMODULE_HH
+#endif  // CROOT_CROOTWRITERMODULE_HH
