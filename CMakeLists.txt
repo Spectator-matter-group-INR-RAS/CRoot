@@ -35,11 +35,6 @@ include(CMakePackageConfigHelpers)
 set(CMAKE_INSTALL_PREFIX ${COLA_DIR})
 set(COLA_MODULE_NAME CRoot)
 
-set(COLA_CMAKE_CXX_CLANG_TIDY
-    ""
-    CACHE STRING "Passed to CMAKE_CXX_CLANG_TIDY for ${COLA_MODULE_NAME} targets"
-)
-
 set(UNIGEN_SRCS UniGen/src/UEvent.cxx UniGen/src/UParticle.cxx UniGen/src/URun.cxx)
 
 set(SRCS
@@ -75,9 +70,10 @@ CAAMCCWriter/CAAMCCWriter.hh;CRootModule.hh"
 set_target_properties(
     CRoot
     PROPERTIES PUBLIC_HEADER "${CRoot_PUBLIC_HEADER}"
-               CXX_CLANG_TIDY "${COLA_CMAKE_CXX_CLANG_TIDY}"
-               INSTALL_RPATH_USE_LINK_PATH ON
+               VERSION "${PROJECT_VERSION}"
+               SOVERSION "${PROJECT_VERSION_MAJOR}"
                BUILD_WITH_INSTALL_RPATH TRUE
+               INSTALL_RPATH_USE_LINK_PATH TRUE
 )
 
 # don't lint external UniGen code
@@ -95,7 +91,8 @@ root_generate_dictionary(
     UniGen/include/UParticle.hh
     LINKDEF
     LinkDef.hh
-    MODULE CRoot
+    MODULE
+    CRoot
 )
 
 # Check for COLA_FETCH_MODE to prevent install instructions from generating
@@ -137,5 +134,5 @@ if (NOT DEFINED ENV{COLA_FETCH_MODE})
             DESTINATION ${CMAKE_INSTALL_LIBDIR}/${COLA_MODULE_NAME}
     )
 
-    setup_cola_quality_tools(EXCLUDE_PATTERNS ".*/UniGen/.*" ".*/COLA/.*")
+    setup_cola_quality_tools(EXCLUDE_PATTERNS ".*/UniGen/.*")
 endif ()

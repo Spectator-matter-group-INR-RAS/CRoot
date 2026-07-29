@@ -20,6 +20,16 @@
 
 #include "CNativeRootWriter.hh"
 
+#include "CRootWriter.hh"
+
+#include <EventData.hh>
+#include <TTree.h>
+
+#include <cstddef>
+#include <memory>
+#include <string>
+#include <utility>
+
 using namespace cola;
 
 CNativeRootWriter::CNativeRootWriter(const std::string& f_name, size_t buff_size, bool write_coord)

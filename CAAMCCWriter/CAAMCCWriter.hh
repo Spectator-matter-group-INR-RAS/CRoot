@@ -21,12 +21,13 @@
 #ifndef CROOT_CAAMCCWRITER_HH
 #define CROOT_CAAMCCWRITER_HH
 
-#include "COLA.hh"
 #include "CRootWriter.hh"
-#include "TFile.h"
 #include "TTree.h"
 
+#include <EventData.hh>
+
 #include <array>
+#include <cstddef>
 #include <memory>
 #include <string>
 #include <vector>
