@@ -20,6 +20,14 @@
 
 #include "CRootWriter.hh"
 
+#include <EventData.hh>
+#include <TFile.h>
+
+#include <cstddef>
+#include <memory>
+#include <string>
+#include <utility>
+
 using namespace cola;
 
 CRootWriter::CRootWriter(const std::string& f_name, size_t buff_size)

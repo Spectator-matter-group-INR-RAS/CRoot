@@ -20,6 +20,16 @@
 
 #include "CAAMCCWriter.hh"
 
+#include "CRootWriter.hh"
+
+#include <EventData.hh>
+#include <TTree.h>
+
+#include <cmath>
+#include <cstddef>
+#include <memory>
+#include <string>
+
 using namespace cola;
 
 CAAMCCWriter::CAAMCCWriter(const std::string& f_name, size_t buff_size, bool write_coord)

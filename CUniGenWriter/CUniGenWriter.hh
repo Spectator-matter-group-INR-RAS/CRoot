@@ -22,16 +22,15 @@
 #define CROOT_CUNIGENWRITER_HH
 
 #include "CRootWriter.hh"
-#include "Riostream.h"
-#include "TFile.h"
 #include "TTree.h"
 #include "UEvent.hh"
-#include "UParticle.hh"
 #include "URun.hh"
 
-#include <COLA.hh>
+#include <EventData.hh>
 
-#include <utility>
+#include <cstddef>
+#include <memory>
+#include <string>
 
 namespace cola {
 
